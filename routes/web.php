@@ -5,7 +5,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 
-Route::resource('alumnos', AlumnoController::class);
+Route::resource('alumnos', AlumnoController::class)
+    ->middleware('auth');
 
 Route::get('/index',MainController::class);
 Route::view("/","home")->name("home");

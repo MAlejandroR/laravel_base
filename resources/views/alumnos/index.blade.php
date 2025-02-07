@@ -1,6 +1,6 @@
 <x-layouts.layout>
     @if (session("mensaje"))
-        <div role="alert" class="alert alert-success">
+        <div id="message" role="alert" class="alert alert-success">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-6 w-6 shrink-0 stroke-current"
@@ -82,5 +82,11 @@
             })
 
         }
+        setTimeout( ()=>{
+            var message = document.getElementById("message")
+            message.style.transition="opacity 0.5s"
+            message.style.opacity='0'
+            setTimeout(()=>message.remove,500)
+        },5000);
     </script>
 </x-layouts.layout>

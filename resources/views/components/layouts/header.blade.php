@@ -3,9 +3,8 @@
     flex flex-col md:flex-row justify-between px-3 items-center">
     <img class="w-1/2 h-12  md:w-1/12 md:max-h-full" src="{{asset("images/logo.jpeg")}}" alt="logo">
     <h1 class = "hidden md:block text-white text-5xl" > {{__("MI GESTIÓN INSTITUTO")}}</h1>
-    <h2 class="text-white">{{__("otro texto")}}</h2>
-{{--    Laptop--}}
-    <div class="hidden md:block"">
+    {{--    Laptop--}}
+    <div class="hidden md:flex flex-row space-x-3">
         @auth
             <span class="text-white">{{ auth()->user()->name }}
             <form action="{{route("logout")}}" method="POST">
@@ -19,6 +18,7 @@
                 <a class="btn  btn-glass" href="{{route("login")}}">Login</a>
                 <a class="btn  btn-glass" href="{{route("register")}}">Register</a>
         @endguest
+       <x-layouts.lang />
 
     </div>
                     {{--Mobile--}}

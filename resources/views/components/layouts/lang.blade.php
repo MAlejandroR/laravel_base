@@ -6,19 +6,15 @@
                 {{config("languages")[App::getLocale()]['flag']}}
             </span>
         </div>
-
     </x-slot>
     <x-slot name="content">
         @foreach(config("languages") as $code =>$lang)
             <span class="flex flex-row space-x-2 hover:cursor-pointer ">
-              <a href="{{route("language",$code)}}">
-              <a href="/language/{{$code}}') }}">
-
+              <a href="{{route('language',$code)}}" class ="hover:bg-gray-300 ">
                   {{$lang['name']}}
-                {{$lang['flag']}}
+                  {{$lang['flag']}}
                 </a>
             </span>
-
 
         @endforeach
 

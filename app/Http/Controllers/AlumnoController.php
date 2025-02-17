@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAlumnoRequest;
 use App\Http\Requests\UpdateAlumnoRequest;
 use App\Models\Alumno;
+use App\Models\Idioma;
 use Illuminate\Support\Facades\Schema;
 
 class AlumnoController extends Controller
@@ -38,8 +39,20 @@ class AlumnoController extends Controller
      */
     public function store(StoreAlumnoRequest $request)
     {
-        $datos = $request->input();
+        $datos = $request->only("nombre","email","f_nac","dni");
         $alumno = new Alumno($datos);
+        $alumno->save();
+
+        if ($request->has("idiomas")){
+            foreach ($request->idiomas as $idioma_hablado){
+                $idioma = new Idioma();
+                $idioma->alumno_id= $alumno->id;
+                $idioma->idioma = $idioma_hablado;
+                $idioma->nivel = $request->nivel[$idioma_hablado];
+                $idioma->titulo = $request->titulo[$idioma_hablado];
+                $idioma->save();
+            }
+        }
 
         $alumno->save();
         session()->flash("mensaje","Alumno $alumno->nombre registrado");
@@ -53,6 +66,8 @@ class AlumnoController extends Controller
      */
     public function show(Alumno $alumno)
     {
+        return view('alumnos.show',compact('alumno'));
+
         //
     }
 

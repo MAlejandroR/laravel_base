@@ -58,9 +58,9 @@
                         </svg>
                             </button>
                         </form>
-
-
                     </td>
+{{--                        Vero o show--}}
+                    <td><a href="{{route("alumnos.show", $fila->id)}}">Ver</a></td>
                 </tr>
 
             @endforeach

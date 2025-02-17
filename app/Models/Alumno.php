@@ -10,4 +10,8 @@ class Alumno extends Model
     /** @use HasFactory<\Database\Factories\AlumnoFactory> */
     use HasFactory;
     public $fillable=["nombre","dni","email", "f_nac"];
+
+    public function idiomas(){
+        return $this->hasMany(Idioma::class);
+    }
 }

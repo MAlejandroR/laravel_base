@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AlumnoCollection;
+use App\Http\Resources\AlumnoResource;
 use App\Models\Alumno;
 use Illuminate\Http\Request;
 
@@ -13,9 +15,11 @@ class AlumnoApiController extends Controller
     public function index()
     {
         $alumnos = Alumno::all();
-        return response()->json($alumnos);
+        return new AlumnoCollection($alumnos);
+
         //
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -28,9 +32,17 @@ class AlumnoApiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Alumno $alumno)
+    public function show(int $alumno)
     {
-        return response()->json($alumno);
+        $alumno = Alumno::find($alumno);
+        if ($alumno!=null)
+                return new AlumnoResource($alumno);
+        return response()->json([
+            "errors" => [
+                "status" => 404,
+                "title" => "Alumno not found",
+            ]
+        ], 404);
         //
     }
 
@@ -45,8 +57,22 @@ class AlumnoApiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
+        $alumno = Alumno::find($id);
+        if ($alumno!=null) {
+            $alumno->delete();
+            return response()->noContent();
+        }
+
+        return response()->json([
+            "errors" => [
+                "status" => 404,
+                "title" => "Alumno not found",
+                "detail" => "Not posible deleted students "
+            ]
+        ], 404);
+
         //
     }
 }

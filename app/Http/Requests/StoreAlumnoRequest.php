@@ -36,7 +36,8 @@ class StoreAlumnoRequest extends FormRequest
     public function messages(): array
     {
         return [
-            "nombre.required" => "El nombre es requerido",
+//            "nombre.required" => "El nombre es requerido",
+            "nombre.string" => "El nombre debe ser texto",
             "nombre.min" => "El nombre debe tener al menos 5 caracteres",
             "email.required" => "El email es requerido",
             "email.unique" => "El email ya esta registrado",

@@ -1,4 +1,9 @@
 <x-layouts.layout>
+    @if ($errors)
+        @foreach($errors->all() as $error)
+            {{$error}}<br />
+        @endforeach
+    @endif
     <div class="flex flex-row justify-center items-center min-h-full bg-gray-300">
         <!-- Session Status -->
 
@@ -14,9 +19,12 @@
                             <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre"
                                           value="{{old('nombre')}}"/>
                             @error("nombre")
-                            <div class="text-sm text-red-600">
-                                {{$message}}
-                            </div>
+{{--                            <x-input-error message="{{$errors->get('nombre') }}" />--}}
+                            <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
+
+{{--                            <div class="text-sm text-red-600">--}}
+{{--                                {{$message}}--}}
+{{--                            </div>--}}
                             @enderror
 
 
@@ -27,6 +35,7 @@
                                           type="email" name="email"
                                           value="{{old('email')}}"
                                           required autofocus autocomplete="email" />
+
                             @error("email")
                             <div class="text-sm text-red-600">
                                 {{$message}}
@@ -46,6 +55,8 @@
                                 {{$message}}
                             </div>
                             @enderror
+
+
 
                         </div>
                         <div>

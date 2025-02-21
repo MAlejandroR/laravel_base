@@ -11,6 +11,10 @@ return[
     "en"=>[
         "name"=>"Enghis",
         "flag"=>"🇬🇧",
+    ],"de"
+        =>[
+        "name"=>"Aleman",
+        "flag"=>":smily:",
     ]
 ]
 ?>
